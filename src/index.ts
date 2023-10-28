@@ -2,12 +2,14 @@ import { Client, Collection, IntentsBitField, Message } from "discord.js"
 import fs from "fs"
 // @ts-ignore
 import Ector from "ector"
+import { config } from "dotenv"
+config()
 
 const ector = new Ector("bot", "user")
 loadCN("./bot.json", ector)
 
 function saveCN(filePath: string, ector: Ector) {
-  fs.writeFileSync(filePath, JSON.stringify(this.ector))
+  fs.writeFileSync(filePath, JSON.stringify(ector.cn))
   return true
 }
 
@@ -105,6 +107,4 @@ async function replaceAsync(str: string, regex: RegExp, asyncFn) {
   return str.replace(regex, () => data.shift())
 }
 
-client.login(
-  "NTA3MDg0NTEzNjE3MjQ4MjY4.GDMjDC.uSaTer_v-dWUUYSS0uA3Y7aCRg_ZxfydAF9dYI"
-)
+client.login(process.env.DISCORD_TOKEN)
